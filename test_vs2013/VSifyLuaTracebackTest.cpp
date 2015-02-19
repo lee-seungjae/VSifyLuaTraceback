@@ -12,12 +12,13 @@ int _tmain()
 		"\t[C]: in function 'error'\n"
 		"\t.\\a\\b.lua:2: in function 'B'\n"
 		"\ttest.lua:7: in function 'step'\n"
+		"\t[string \"lib/UnitTest.lua\"]:88: in function 'TestType'\n"
 		"\ttest.lua:11: in main chunk\n"
 		"\t[C]: ?\n"
 		"\n";
 
-	cout << endl << "Test run:" << endl << endl;
-	cout << VSifyLuaTraceback(tb, "c:\\Test\\");
+	cout << endl << "Input:" << endl << tb << endl << endl;
+	cout << "Output:" << endl << VSifyLuaTraceback(tb, "c:\\Test\\");
 	return 0;
 }
 

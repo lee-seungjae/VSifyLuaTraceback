@@ -49,10 +49,22 @@ namespace
 		}
 
 		size_t begin = first ? 0 : 1;
-		if (line.substr(begin, 2) == ".\\")
+
+		string path = line.substr(begin, firstColonPos - begin);
+		if (path.substr(0, 9) == "[string \"" &&
+			path.substr(path.length() - 2) == "\"]")
 		{
-			begin += 2;
+			path = path.substr(9, path.length() - 11);
 		}
+		if (path.substr(0, 2) == ".\\")
+		{
+			path = path.substr(2);
+		}
+		for (size_t i = 0; i < path.length(); ++i)
+		{
+			if (path[i] == '/') { path[i] = '\\'; }
+		}
+
 
 		string rv;
 		rv.reserve(line.size() + pathPrefix.size() + 5);
@@ -60,9 +72,8 @@ namespace
 		{
 			rv = "\t";
 		}
-
 		rv += pathPrefix;
-		rv += line.substr(begin, firstColonPos - begin);
+		rv += path;
 		rv += "(";
 		rv += line.substr(firstColonPos + 1, secondColonPos - firstColonPos - 1);
 		rv += ")";
