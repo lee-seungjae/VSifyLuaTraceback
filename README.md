@@ -5,10 +5,11 @@ VSifyLuaTraceback enchants Lua's debug.traceback() result to enable jumping into
 
 ```
 .\a\b.lua:2: Error in b.lua
-stack tracebac:k
+stack traceback:
 	[C]: in function 'error'
 	.\a\b.lua:2: in function 'B'
 	test.lua:7: in function 'step'
+	[string "lib/UnitTest.lua"]:88: in function 'TestType'
 	test.lua:11: in main chunk
 	[C]: ?
 ```
@@ -21,6 +22,7 @@ stack traceback:
 	[C]: in function 'error'
 	C:\Test\a\b.lua(2): in function 'B'
 	C:\Test\test.lua(7): in function 'step'
+	C:\Test\lib\UnitTest.lua(88): in function 'TestType'
 	C:\Test\test.lua(11): in main chunk
 	[C]: ?
 ```
