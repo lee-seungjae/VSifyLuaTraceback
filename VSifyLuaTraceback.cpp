@@ -32,7 +32,7 @@ namespace
 	}
 
 	//-------------------------------------------------------------------------
-	string ConvertLine(string line, bool first, const string& pathPrefix)
+	string ConvertLine(const string& line, bool first, const string& pathPrefix)
 	{
 		bool candidate = (first || (!line.empty() && line[0] == '\t'));
 		if (!candidate) { return line; }
