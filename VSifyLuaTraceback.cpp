@@ -32,7 +32,7 @@ namespace
 	}
 
 	//-------------------------------------------------------------------------
-	string ConvertLine(const string& line, bool first, const string& pathPrefix)
+	string ConvertLine(string line, bool first, const string& pathPrefix)
 	{
 		bool candidate = (first || (!line.empty() && line[0] == '\t'));
 		if (!candidate) { return line; }
@@ -47,6 +47,20 @@ namespace
 		{
 			if (!isdigit(line[i])) { return line; }
 		}
+
+		// Nested error position {
+		if (secondColonPos + 2 < line.size() &&
+			line[secondColonPos + 1] == ' ' &&
+			line[secondColonPos + 2] == '$')
+		{
+			string rest = line.substr(secondColonPos + 3);
+			string convertedRest = ConvertLine(rest, first, pathPrefix);
+			if (rest != convertedRest)
+			{
+				return convertedRest;
+			}
+		}
+		// Nested error position }
 
 		size_t begin = first ? 0 : 1;
 

@@ -26,3 +26,13 @@ stack traceback:
 	C:\Test\test.lua(11): in main chunk
 	[C]: ?
 ```
+
+#### Nested error position
+Useful when an error catched from pcall()/xpcall() is rethrown with error('$' .. err).
+```
+.\a\b.lua:5: $.\a\b.lua:2: Error in b.lua
+```
+is converted to
+```
+C:\Test\a\b.lua(2): Error in b.lua
+```
